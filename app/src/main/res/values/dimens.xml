@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="outer_arc_size">255dp</dimen>
+    <dimen name="arc_size">200dp</dimen>
+    <dimen name="arc_width">10dp</dimen>
+    <dimen name="circle_size">20dp</dimen>
+    <dimen name="arc_padding">10dp</dimen>
+
+    <dimen name="round_width">150dp</dimen>
+    <dimen name="round_height">50dp</dimen>
+    <dimen name="round_radius">30dp</dimen>
+    <dimen name="round_stroke_width">8dp</dimen>
+</resources>
