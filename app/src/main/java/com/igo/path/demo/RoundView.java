@@ -19,7 +19,8 @@ import android.view.animation.LinearInterpolator;
  */
 public class RoundView extends View {
 
-    private float[] mRadius = new float[4];
+    private static final int RADIUS_ARRAY_LENGTH = 8;
+    private float[] mRadius;
     private float mRoundRadius;
 
     private Path mRoundPath;
@@ -56,7 +57,7 @@ public class RoundView extends View {
         mRoundHeight = res.getDimensionPixelOffset(R.dimen.round_height);
         mRoundRadius = res.getDimension(R.dimen.round_radius);
         mRoundSolidColor = ContextCompat.getColor(context,R.color.round_solid_color);
-        mRadius = new float[]{mRoundRadius, mRoundRadius, mRoundRadius, mRoundRadius, mRoundRadius, mRoundRadius, mRoundRadius, mRoundRadius};
+        mRadius = createFloatArray(mRoundRadius, RADIUS_ARRAY_LENGTH);
         mRoundRect = new RectF();
         mRoundPath = new Path();
         mRoundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -71,6 +72,14 @@ public class RoundView extends View {
         mMoveBarColor = ContextCompat.getColor(context,R.color.round_move_bar_color);
         mMovePaint = makeStrokePaint(mMoveBarColor);
         mMovePath = new Path();
+    }
+
+    private static float[] createFloatArray(float value, int length) {
+        float[] array = new float[length];
+        for (int i=0; i < length; i++) {
+            array[i] = value;
+        }
+        return array;
     }
 
     private Paint makeStrokePaint(int color) {
