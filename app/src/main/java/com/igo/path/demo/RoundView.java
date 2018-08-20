@@ -123,16 +123,30 @@ public class RoundView extends View {
     }
 
     @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        if (mMoveAnimator != null) {
+            mMoveAnimator.cancel();
+            mMoveAnimator.removeAllUpdateListeners();
+        }
+    }
+
+    @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         float arcLeft = getPaddingLeft() + (getMeasuredWidth() - getPaddingLeft() - getPaddingLeft() - mRoundWidth) / 2;
         float arcTop = getPaddingTop() + (getMeasuredHeight() - getPaddingBottom() - getPaddingTop() - mRoundHeight) / 2;
         mRoundRect.set(arcLeft, arcTop, mRoundWidth + arcLeft, arcTop + mRoundHeight);
 
-        mRoundPath.addRoundRect(mRoundRect, mRadius, Path.Direction.CW);
-        mStrokePath.addRoundRect(mRoundRect, mRadius, Path.Direction.CW);
+        addRoundRectPath(mRoundPath,mRoundRect);
+        addRoundRectPath(mStrokePath, mRoundRect);
         mStrokePathMeasure.setPath(mStrokePath, false);
         startMoveAnimator();
+    }
+
+    private void addRoundRectPath(Path path, RectF rectF) {
+        path.reset();
+        path.addRoundRect(rectF,mRadius, Path.Direction.CW);
     }
 
     @Override
